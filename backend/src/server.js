@@ -9,6 +9,12 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
+// Middleware didático para simular atraso em TODAS as requisições
+app.use(async (req, res, next) => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  next();
+});
+
 // Dados em memória
 let nextRecipeId = 1;
 let nextReviewId = 1;
